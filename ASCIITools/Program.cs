@@ -10,10 +10,10 @@ namespace ASCIITools
     {
         static void Main(string[] args)
         {
-            var picture = ImageConverter.GetImage(@"C:\Users\paul\Pictures\float.jpg");
+            var picture = ImageConverter.GetImage(@"C:\Users\Pax Prose\Pictures\nimoy.jpg");
             string[] message = ImageConverter.ConvertGreyImage(picture);
             //string[] message2 = ImageConverter.ConvertColorImage(picture);
-            ImageConverter.SaveImage(message, "name");
+            ImageConverter.SaveImage(message, "blame");
 
             for(int i = 0; i< message.Count(); i++)
             {

@@ -46,29 +46,59 @@ namespace ASCIITools
         private static char ASCIIPixel(int shade)
         {
             char dot = '.';
-            if (shade >= 250)
-                return (char)32; // ' '
-            else if (shade >= 225)
-                return (char)46; // .
-            else if (shade >= 200)
-                return (char)39; // '
-            else if (shade >= 175)
-                return (char)42; // *
-            else if (shade >= 150)
-                return (char)58; // :
-            else if (shade >= 125)
-                return (char)33;//  !
-            else if (shade >= 100)
-                return (char)124;// |
-            else if (shade >= 75)
-                return (char)36;//  $
-            else if (shade >= 50)
-                return (char)56;//  8
-            else if (shade >= 25)
-                return (char)64;//  @
-            else if (shade >= 0)
-                return (char)35;//  #
+            //if (shade >= 250)
+            //    return (char)32; // ' '
+            //else if (shade >= 225)
+            //    return (char)46; // .
+            //else if (shade >= 200)
+            //    return (char)39; // '
+            //else if (shade >= 175)
+            //    return (char)42; // *
+            //else if (shade >= 150)
+            //    return (char)58; // :
+            //else if (shade >= 125)
+            //    return (char)33;//  !
+            //else if (shade >= 100)
+            //    return (char)124;// |
+            //else if (shade >= 75)
+            //    return (char)36;//  $
+            //else if (shade >= 50)
+            //    return (char)56;//  8
+            //else if (shade >= 25)
+            //    return (char)64;//  @
+            //else if (shade >= 0)
+            //    return (char)35;//  #
 
+            if (shade >= 250)
+                return (char)32;    //' '
+            else if (shade >= 245)
+                return (char)39;    //.
+            else if (shade >= 235)
+                return (char)46;    //'
+            else if (shade >= 230)
+                return (char)42;    //"
+            else if (shade >= 210)
+                return (char)34;    //*
+            else if (shade >= 185)
+                return (char)58;    //:
+            else if (shade >= 175)
+                return (char)59;    //;
+            else if (shade >= 155)
+                return (char)33;   //?
+            else if (shade >= 120)
+                return (char)63;    //!
+            else if (shade >= 85)
+                return (char)37;    //$
+            else if (shade >= 45)
+                return (char)64;    //8
+            else if (shade >= 35)
+                return (char)56;    //@
+            else if (shade >= 25)
+                return (char)38;
+            else if (shade >= 0)
+                return (char)35;    //#
+
+          
 
             return dot; 
         }
@@ -82,7 +112,7 @@ namespace ASCIITools
 
         internal static void SaveImage(string[] image, string name)
         {
-            File.WriteAllLines(@"C:\Users\paul\Pictures\" + name + ".txt", image);
+            File.WriteAllLines(@"C:\Users\Pax Prose\Pictures\" + name + ".txt", image);
         }
 
         internal static void SaveColorImage(string[] message, Image img)
