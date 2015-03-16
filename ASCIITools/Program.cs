@@ -16,12 +16,9 @@ namespace ASCIITools
             var picture = ImageConverter.GetImage(path);
             string[] message = ImageConverter.ConvertGreyImage(picture);
             //string[] message2 = ImageConverter.ConvertColorImage(picture);
+            Console.WriteLine("Saving Image...");
             ImageConverter.SaveImage(message, path);
-
-            for(int i = 0; i< message.Count(); i++)
-            {
-                Console.WriteLine(message[i]);
-            }
+            Console.WriteLine("Image Saved!");
 
             Console.ReadLine();
         }

@@ -92,23 +92,16 @@ namespace ASCIITools
         internal static void SaveImage(string[] image, string path)
         {
             File.WriteAllLines(path + ".txt", image);
-            Image img = new Bitmap(1, 1);
+            Image img = new Bitmap((image.Count() + 1) * 10, image.Length * 10);
             Graphics draw = Graphics.FromImage(img);
             SizeF textSize = draw.MeasureString(image[0], new Font(FontFamily.GenericMonospace, 2F));
-            img.Dispose();
-            draw.Dispose();
-            img = new Bitmap((image.Count() + 1) * 10, image.Length * 10);
-            draw = Graphics.FromImage(img);
             draw.Clear(Color.White);
-            //draw.SmoothingMode = SmoothingMode.HighQuality;
             draw.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
             Brush text = new SolidBrush(Color.Black);
             float y = 0;
             Font font = new Font(FontFamily.GenericMonospace, 10.0F);
             for (int i = 0; i < image.Count(); i++)
-            {
                 draw.DrawString(image[i], font, text, new PointF(0, y += font.SizeInPoints));
-            }
 
             draw.Save();
             text.Dispose();
