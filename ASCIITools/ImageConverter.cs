@@ -46,28 +46,7 @@ namespace ASCIITools
         private static char ASCIIPixel(int shade)
         {
             char dot = '.';
-            //if (shade >= 250)
-            //    return (char)32; // ' '
-            //else if (shade >= 225)
-            //    return (char)46; // .
-            //else if (shade >= 200)
-            //    return (char)39; // '
-            //else if (shade >= 175)
-            //    return (char)42; // *
-            //else if (shade >= 150)
-            //    return (char)58; // :
-            //else if (shade >= 125)
-            //    return (char)33;//  !
-            //else if (shade >= 100)
-            //    return (char)124;// |
-            //else if (shade >= 75)
-            //    return (char)36;//  $
-            //else if (shade >= 50)
-            //    return (char)56;//  8
-            //else if (shade >= 25)
-            //    return (char)64;//  @
-            //else if (shade >= 0)
-            //    return (char)35;//  #
+         
 
             if (shade >= 250)
                 return (char)32;    //' '
@@ -110,9 +89,9 @@ namespace ASCIITools
 
         
 
-        internal static void SaveImage(string[] image, string name)
+        internal static void SaveImage(string[] image, string path)
         {
-            File.WriteAllLines(@"C:\Users\Pax Prose\Pictures\" + name + ".txt", image);
+            File.WriteAllLines(path + ".txt", image);
         }
 
         internal static void SaveColorImage(string[] message, Image img)
