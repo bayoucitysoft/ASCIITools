@@ -35,9 +35,9 @@ namespace ASCIITools
                     {
                         var picture = ImageConverter.GetImage(path);
                         if ((c == 'C' || c == 'c'))
-                            ImageConverter.ConvertColorImage(picture, save + "\\" + name + ".png");
+                            ImageConverter.ConvertImage(picture, save + "\\" + name + ".png", true);
                         if ((c == 'B' || c == 'b'))
-                            ImageConverter.ConvertGreyImage(picture, save + "\\" + name + ".png");
+                            ImageConverter.ConvertImage(picture, save + "\\" + name + ".png", false);
                         
                         Console.WriteLine("Image Saved!");
                         Main(new string[0]);
@@ -63,13 +63,7 @@ namespace ASCIITools
 
     public static class ImageConverter
     {
-        public static Image GetImage(string path)
-        {
-            return Image.FromFile(path);
-        }
-
-
-        public static void ConvertGreyImage(Image img, string path)
+        public static void ConvertImage(Image img, string path, bool isColor)
         {
             int ratio = img.Width / img.Height;
             Image toDraw = new Bitmap(img.Width * 10, img.Height * 10);
@@ -79,8 +73,6 @@ namespace ASCIITools
             Font font = new Font(FontFamily.GenericSansSerif, 10);
 
             Bitmap bmp = new Bitmap(img);
-            string[] message = new string[bmp.Height];
-            string row = string.Empty;
             for (int y = 0; y < bmp.Height; y++)
             {
                 for (int x = 0; x < bmp.Width; x++)
@@ -89,83 +81,13 @@ namespace ASCIITools
                     int grey = ConvertToGrayScale(color);
                     Color colorGreyScale = Color.FromArgb(grey, grey, grey);
                     string toPaint = ASCIIPixel((int)colorGreyScale.R).ToString();
-                    Brush text = new SolidBrush(Color.Black);
-                    draw.DrawString(toPaint, font, text, new PointF((float)x * 10, (float)y * 10));
-                    text.Dispose();
-                }
-            }
+                    
+                    Brush text;
+                    if (isColor)
+                        text = new SolidBrush(color);
+                    else
+                        text = new SolidBrush(Color.Black);
 
-            draw.Save();
-            draw.Dispose();
-            toDraw.Save(path, ImageFormat.Png);
-            toDraw.Dispose();
-        }
-
-        //public static void ConvertGreyImage(Image img, string path)
-        //{
-        //    Bitmap bmp = new Bitmap(img);
-        //    string[] message = new string[bmp.Height];
-        //    string row = string.Empty;
-        //    for (int y = 0; y < bmp.Height; y++)
-        //    {
-        //        for (int x = 0; x < bmp.Width; x++)
-        //        {
-        //            Color color = bmp.GetPixel(x, y);
-        //            int grey = ConvertToGrayScale(color);
-        //            color = Color.FromArgb(grey, grey, grey);
-        //            row += ASCIIPixel((int)color.R).ToString();
-        //            if (x == bmp.Width - 1)
-        //            {
-        //                message[y] = row;
-        //                row = string.Empty;
-        //            }
-        //        }
-        //    }
-        //    SaveGreyImage(message, path);
-        //}
-
-
-        //internal static void SaveGreyImage(string[] image, string path)
-        //{
-        //    Image img = new Bitmap((image[0].Length * 10), (image.Count() + 1) * 10);
-        //    Graphics draw = Graphics.FromImage(img);
-        //    SizeF textSize = draw.MeasureString(image[0], new Font(FontFamily.GenericMonospace, 2F));
-        //    draw.Clear(Color.White);
-        //    draw.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-        //    Brush text = new SolidBrush(Color.Black);
-        //    float y = 0;
-        //    Font font = new Font(FontFamily.GenericMonospace, 10.0F, FontStyle.Bold);
-        //    for (int i = 0; i < image.Count(); i++)
-        //        draw.DrawString(image[i], font, text, new PointF(0, y += font.SizeInPoints));
-
-        //    draw.Save();
-        //    text.Dispose();
-        //    draw.Dispose();
-
-        //    img.Save(path, ImageFormat.Png);
-        //}
-
-        public static void ConvertColorImage(Image img, string path)
-        {
-            int ratio = img.Width / img.Height;
-            Image toDraw = new Bitmap(img.Width * 10, img.Height * 10);
-            Graphics draw = Graphics.FromImage(toDraw);
-            draw.Clear(Color.White);
-            draw.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-            Font font = new Font(FontFamily.GenericSansSerif, 10);
-
-            Bitmap bmp = new Bitmap(img);
-            string[] message = new string[bmp.Height];
-            string row = string.Empty;
-            for (int y = 0; y < bmp.Height; y++)
-            {
-                for (int x = 0; x < bmp.Width; x++)
-                {
-                    Color color = bmp.GetPixel(x, y);
-                    int grey = ConvertToGrayScale(color);
-                    Color colorGreyScale = Color.FromArgb(grey, grey, grey);
-                    string toPaint = ASCIIPixel((int)colorGreyScale.R).ToString();
-                    Brush text = new SolidBrush(color);
                     draw.DrawString(toPaint, font, text, new PointF((float)x * 10, (float)y * 10));
                     text.Dispose();
                 }
