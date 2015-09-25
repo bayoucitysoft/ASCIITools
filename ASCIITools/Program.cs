@@ -33,7 +33,7 @@ namespace ASCIITools
                     Console.WriteLine("Saving Image...");
                     try
                     {
-                        var picture = ImageConverter.GetImage(path);
+                        var picture = Image.FromFile(path);
                         if ((c == 'C' || c == 'c'))
                             ImageConverter.ConvertImage(picture, save + "\\" + name + ".png", true);
                         if ((c == 'B' || c == 'b'))
@@ -44,7 +44,7 @@ namespace ASCIITools
                     }
                     catch (Exception ex)
                     {
-                        Error(new Exception(ex.Message + System.Environment.NewLine + "Generally invalid post path specification. i.e. C: instead of C:\\"));
+                        Error(new Exception(ex.Message + System.Environment.NewLine + "Generally invalid post path specification. i.e. C: instead  of C:\\"));
                     }
                 }
                 else
